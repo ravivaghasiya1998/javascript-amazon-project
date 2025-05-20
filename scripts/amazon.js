@@ -25,7 +25,7 @@ products.forEach( (product) => {
           </div>
 
           <div class="product-quantity-container">
-            <select>
+            <select class="js-quantity-selector-${product.id}">
               <option selected value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -68,12 +68,17 @@ document.querySelectorAll('.js-add-to-cart')
                 matchingItem = item;   
             }
         });
+        // 13-a --> 13-e //
+        const quatnitySelector = document.querySelector(
+            `.js-quantity-selector-${productId}`);
+        const quantity = Number(quatnitySelector.value)
+
         if (matchingItem){
-            matchingItem.quantity += 1;
+            matchingItem.quantity += quantity;
         } else {
             cart.push({
                 productId: productId,
-                quantity: 1
+                quantity: quantity
             });
         }   
 
@@ -83,5 +88,7 @@ document.querySelectorAll('.js-add-to-cart')
         });
         document.querySelector('.js-cart-quantity')
             .innerHTML = cartQuantity;
+
+        
     });
 })
